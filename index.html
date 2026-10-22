@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio – UI/UX Designer</title>
+  <meta name="description" content="Portfolio eines UI/UX Designers: Produkte, die sich einfach anfühlen.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="topo" aria-hidden="true"></canvas>
+
+  <header class="nav">
+    <a class="logo" href="#top">-DN</a>
+    <nav>
+      <a href="#projekte">Projekte</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Hallo, ich bin</p>
+      <h1>DEIN NAME</h1>
+      <p class="sub">UI/UX Designer · Produkte, die sich einfach anfühlen</p>
+      <a class="btn" href="#projekte">Projekte ansehen</a>
+      <span class="scroll">Scroll</span>
+    </section>
+
+    <section id="projekte" class="projects">
+      <h2>Ausgewählte Projekte</h2>
+
+      <article class="project">
+        <p class="tag">01 · Mobile App</p>
+        <h3>Pulse</h3>
+        <p class="lead">Die Companion-App für Fitness-Tracker, die Training verständlich statt kompliziert macht.</p>
+        <dl>
+          <div><dt>Problem</dt><dd>Nutzer:innen waren von über 40 Kennzahlen überfordert und brachen das Onboarding nach durchschnittlich 2 Minuten ab.</dd></div>
+          <div><dt>Lösung</dt><dd>Ein „Tagesziel-Ring“ als einziger Einstieg, Details erst auf Wunsch. Klare Typografie, dunkles Interface für Training im Gym.</dd></div>
+          <div><dt>Ergebnis</dt><dd>+38 % abgeschlossenes Onboarding, 4,8 Sterne im Prototypen-Test mit 24 Personen.</dd></div>
+        </dl>
+      </article>
+
+      <article class="project">
+        <p class="tag">02 · Web Dashboard</p>
+        <h3>Atlas</h3>
+        <p class="lead">Ein Analytics-Dashboard, das Teams in 10 Sekunden zeigt, was heute wichtig ist.</p>
+        <dl>
+          <div><dt>Problem</dt><dd>Reports waren verstreut auf fünf Tools, Entscheidungen dauerten Tage.</dd></div>
+          <div><dt>Lösung</dt><dd>Eine Startseite mit drei Kernzahlen, Filter per Tastatur und ein modulares Karten-System.</dd></div>
+          <div><dt>Ergebnis</dt><dd>Reporting-Zeit um die Hälfte gesenkt, Design-System mit 48 Komponenten.</dd></div>
+        </dl>
+      </article>
+
+      <article class="project">
+        <p class="tag">03 · Design System</p>
+        <h3>Nova</h3>
+        <p class="lead">Ein skalierbares Komponenten-Set für ein Fintech-Produkt, vom Token bis zur Dokumentation.</p>
+        <dl>
+          <div><dt>Problem</dt><dd>Drei Teams, drei Button-Varianten, keine gemeinsame Sprache.</dd></div>
+          <div><dt>Lösung</dt><dd>Design-Tokens, barrierefreie Komponenten (WCAG AA) und eine lebende Doku für Design und Entwicklung.</dd></div>
+          <div><dt>Ergebnis</dt><dd>Neue Screens entstehen 3× schneller, einheitlicher Look über alle Plattformen.</dd></div>
+        </dl>
+      </article>
+    </section>
+
+    <section id="kontakt" class="contact">
+      <h2>Kontakt</h2>
+      <p>Du hast ein Produkt, das besser werden soll? Lass uns sprechen.</p>
+      <p class="mail"><a href="mailto:hallo@example.com">hallo@example.com</a></p>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> DEIN NAME</footer>
+  <script src="script.js"></script>
+</body>
+</html>
