@@ -1,11 +1,11 @@
 # Portfolio – UI/UX Designer
 
-One-Pager im dunklen Topo-Linien-Look mit Akzentblau `#3396FF`. Reines HTML, CSS und JavaScript, ohne Build-Schritt und ohne Abhängigkeiten.
+One-Pager im dunklen Topo-Linien-Look mit Akzentblau `#3396FF`. Reines HTML, CSS und JavaScript, ohne Build-Schritt. Einzige Abhängigkeit: three.js (r128) per CDN für das 3D-Modell.
 
 ## Inhalt
 
 - **Hero** mit Buchstaben-Intro und animierten Linien, die auf Maus und Scroll reagieren
-- **Produkt** „Orbit One" (Smart Ring) mit kreisenden Ringen und Zahlen-Animation
+- **Produkte**: „Orbit One" (Smart Ring) mit kreisenden Ringen und „Aura Studio" (Kopfhörer) als drehbares 3D-Modell mit three.js (per CDN geladen)
 - **Projekte** als Case Studies (Pulse, Atlas, Nova)
 - **Kontakt** per E-Mail-Link
 

@@ -106,3 +106,80 @@ function loop(ms) {
 addEventListener("resize", () => { resize(); if (still) draw(0); });
 resize();
 requestAnimationFrame(loop);
+
+// 3D-Kopfhörer (three.js), drehbar per Maus/Finger
+(function () {
+  const box = document.getElementById("viewer"), cv = document.getElementById("gl");
+  const hint = box.querySelector(".hint");
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true }); }
+  catch { hint.textContent = "3D-Ansicht nicht verfügbar"; return; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(35, 1, 0.1, 50);
+  cam.position.set(0, 0.2, 8.5);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(3, 4, 5); scene.add(key);
+  const blue = new THREE.PointLight(0x3396ff, 2.2, 20); blue.position.set(-4, 1, 4); scene.add(blue);
+
+  const dark = new THREE.MeshStandardMaterial({ color: 0x15151a, metalness: 0.85, roughness: 0.35 });
+  const soft = new THREE.MeshStandardMaterial({ color: 0x202026, metalness: 0.1, roughness: 0.9 });
+  const glowM = new THREE.MeshBasicMaterial({ color: 0x3396ff });
+  const white = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.35 });
+  const blueLine = new THREE.LineBasicMaterial({ color: 0x3396ff });
+  const g = new THREE.Group(); scene.add(g);
+
+  const wire = (geo, parent) => parent.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 25), white));
+  const circle = (r, mat) => new THREE.LineLoop(
+    new THREE.BufferGeometry().setFromPoints(new THREE.EllipseCurve(0, 0, r, r).getPoints(64).map((p) => new THREE.Vector3(p.x, p.y, 0))), mat);
+
+  // Bügel: Halbkreis über dem Kopf
+  const bandGeo = new THREE.TorusGeometry(1.7, 0.09, 16, 90, Math.PI);
+  const band = new THREE.Mesh(bandGeo, dark); wire(bandGeo, band); g.add(band);
+  const padGeo = new THREE.TorusGeometry(1.7, 0.16, 12, 40, Math.PI / 2.2);
+  const pad = new THREE.Mesh(padGeo, soft); pad.rotation.z = Math.PI / 2 - Math.PI / 4.4; g.add(pad);
+
+  // Ohrmuscheln (links und rechts gespiegelt)
+  for (const s of [-1, 1]) {
+    const cup = new THREE.Group(); cup.position.x = 1.7 * s; cup.rotation.y = (Math.PI / 2) * s;
+    const body = new THREE.CylinderGeometry(0.72, 0.72, 0.34, 56); body.rotateX(Math.PI / 2);
+    const m = new THREE.Mesh(body, dark); wire(body, m); cup.add(m);
+    const cushion = new THREE.Mesh(new THREE.TorusGeometry(0.52, 0.17, 14, 48), soft); cushion.position.z = -0.3; cup.add(cushion);
+    [0.6, 0.48, 0.36].forEach((r) => { const c = circle(r, white); c.position.z = 0.18; cup.add(c); }); // Topo-Ringe
+    const c = circle(0.24, blueLine); c.position.z = 0.19; cup.add(c);
+    const dot = new THREE.Mesh(new THREE.CircleGeometry(0.1, 32), glowM); dot.position.z = 0.2; cup.add(dot);
+    g.add(cup);
+  }
+  g.rotation.set(0.15, -0.6, 0);
+
+  function resize() {
+    const s = box.clientWidth;
+    renderer.setSize(s, s, false);
+    cam.aspect = 1; cam.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(box); resize();
+
+  // Ziehen zum Drehen, mit Schwung
+  let drag = false, lx = 0, ly = 0, vy = 0, vx = 0;
+  box.addEventListener("pointerdown", (e) => { drag = true; lx = e.clientX; ly = e.clientY; box.setPointerCapture(e.pointerId); });
+  box.addEventListener("pointermove", (e) => {
+    if (!drag) return;
+    vy = (e.clientX - lx) * 0.008; vx = (e.clientY - ly) * 0.005;
+    g.rotation.y += vy; g.rotation.x = Math.max(-0.8, Math.min(0.8, g.rotation.x + vx));
+    lx = e.clientX; ly = e.clientY;
+  });
+  const up = () => { drag = false; };
+  box.addEventListener("pointerup", up); box.addEventListener("pointercancel", up);
+
+  let visible = false, raf = 0;
+  function frame(ms) {
+    raf = 0;
+    if (!drag) { vy *= 0.95; g.rotation.y += vy + (still ? 0 : 0.004); }
+    g.position.y = still ? 0 : Math.sin(ms / 900) * 0.08;
+    renderer.render(scene, cam);
+    if (visible && !still) raf = requestAnimationFrame(frame);
+  }
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible && !raf) raf = requestAnimationFrame(frame); }).observe(box);
+  frame(0);
+})();
