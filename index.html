@@ -5,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portfolio – UI/UX Designer</title>
   <meta name="description" content="Portfolio eines UI/UX Designers: Produkte, die sich einfach anfühlen.">
+  <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <canvas id="topo" aria-hidden="true"></canvas>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
 
   <header class="nav">
     <a class="logo" href="#top">-DN</a>
     <nav>
+      <a href="#produkt">Produkt</a>
       <a href="#projekte">Projekte</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
@@ -20,17 +24,49 @@
 
   <main id="top">
     <section class="hero">
-      <p class="eyebrow">Hallo, ich bin</p>
-      <h1>DEIN NAME</h1>
-      <p class="sub">UI/UX Designer · Produkte, die sich einfach anfühlen</p>
-      <a class="btn" href="#projekte">Projekte ansehen</a>
+      <p class="eyebrow reveal">Hallo, ich bin</p>
+      <h1 id="name" aria-label="DEIN NAME">DEIN NAME</h1>
+      <p class="sub reveal" style="--d:.9s">UI/UX Designer · Produkte, die sich einfach anfühlen</p>
+      <a class="btn magnetic reveal" style="--d:1.1s" href="#produkt">Produkt entdecken</a>
       <span class="scroll">Scroll</span>
     </section>
 
-    <section id="projekte" class="projects">
-      <h2>Ausgewählte Projekte</h2>
+    <div class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>UI DESIGN</span><span>UX RESEARCH</span><span>PROTOTYPING</span><span>DESIGN SYSTEMS</span><span>PRODUKT</span>
+        <span>UI DESIGN</span><span>UX RESEARCH</span><span>PROTOTYPING</span><span>DESIGN SYSTEMS</span><span>PRODUKT</span>
+      </div>
+    </div>
 
-      <article class="project">
+    <section id="produkt" class="product">
+      <div class="product-visual reveal" id="tilt" aria-hidden="true">
+        <div class="ring r1"><i></i></div>
+        <div class="ring r2"><i></i></div>
+        <div class="ring r3"><i></i></div>
+        <div class="core"><span>ORBIT</span></div>
+      </div>
+      <div class="product-copy">
+        <p class="tag reveal">Mein Produkt · Smart Ring</p>
+        <h2 class="reveal" style="--d:.1s">Orbit One</h2>
+        <p class="lead reveal" style="--d:.2s">Der Fitness-Ring, der Training, Schlaf und Erholung in einem einzigen Wert zusammenfasst. Ich habe Hardware-Konzept, App und Markenauftritt gestaltet.</p>
+        <ul class="stats">
+          <li class="reveal" style="--d:.3s"><b data-count="7" data-suffix=" Tage">0</b><span>Akkulaufzeit</span></li>
+          <li class="reveal" style="--d:.4s"><b data-count="24" data-suffix="/7">0</b><span>Puls &amp; Schlaf</span></li>
+          <li class="reveal" style="--d:.5s"><b data-count="5" data-suffix=" ATM">0</b><span>Wasserdicht</span></li>
+        </ul>
+        <ul class="features">
+          <li class="reveal" style="--d:.3s">Ein Tagesziel-Ring statt 40 Kennzahlen</li>
+          <li class="reveal" style="--d:.4s">Haptisches Feedback statt Benachrichtigungs-Flut</li>
+          <li class="reveal" style="--d:.5s">Dunkles Interface, gebaut für das Gym</li>
+        </ul>
+        <a class="btn magnetic reveal" style="--d:.6s" href="#projekte">Case Study ansehen</a>
+      </div>
+    </section>
+
+    <section id="projekte" class="projects">
+      <h2 class="reveal">Ausgewählte Projekte</h2>
+
+      <article class="project reveal tilt-card">
         <p class="tag">01 · Mobile App</p>
         <h3>Pulse</h3>
         <p class="lead">Die Companion-App für Fitness-Tracker, die Training verständlich statt kompliziert macht.</p>
@@ -41,7 +77,7 @@
         </dl>
       </article>
 
-      <article class="project">
+      <article class="project reveal tilt-card">
         <p class="tag">02 · Web Dashboard</p>
         <h3>Atlas</h3>
         <p class="lead">Ein Analytics-Dashboard, das Teams in 10 Sekunden zeigt, was heute wichtig ist.</p>
@@ -52,7 +88,7 @@
         </dl>
       </article>
 
-      <article class="project">
+      <article class="project reveal tilt-card">
         <p class="tag">03 · Design System</p>
         <h3>Nova</h3>
         <p class="lead">Ein skalierbares Komponenten-Set für ein Fintech-Produkt, vom Token bis zur Dokumentation.</p>
@@ -65,9 +101,9 @@
     </section>
 
     <section id="kontakt" class="contact">
-      <h2>Kontakt</h2>
-      <p>Du hast ein Produkt, das besser werden soll? Lass uns sprechen.</p>
-      <p class="mail"><a href="mailto:hallo@example.com">hallo@example.com</a></p>
+      <h2 class="reveal">Kontakt</h2>
+      <p class="reveal" style="--d:.1s">Du hast ein Produkt, das besser werden soll? Lass uns sprechen.</p>
+      <p class="mail reveal" style="--d:.2s"><a href="mailto:hallo@example.com">hallo@example.com</a></p>
     </section>
   </main>
 
